@@ -11,7 +11,9 @@ logger = logging.getLogger("AI_Service")
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 if GEMINI_KEY:
     genai.configure(api_key=GEMINI_KEY)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # Using the standard 1.5 flash model
+    model = genai.GenerativeModel('gemini-1.5-flash') 
+
 else:
     logger.warning("[AI] GEMINI_API_KEY not found. Using deterministic fallback algorithm.")
     model = None
