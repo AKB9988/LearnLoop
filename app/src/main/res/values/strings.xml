@@ -1,3 +1,98 @@
 <resources>
     <string name="app_name">LearnLoop</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">LearnLoop</string>
+    <string name="login_subtitle">Learn. Teach. Grow Together.</string>
+    <string name="sign_in_google">Sign in with Google</string>
+    <string name="login_tagline">Where Knowledge Becomes Currency</string>
+    <string name="login_description">A peer-to-peer learning ecosystem powered by Knowledge Credits</string>
+
+    <!-- Navigation -->
+    <string name="nav_requests">Requests</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_create">Post</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Help Requests (formerly Bounty Board) -->
+    <string name="requests_title">Help Requests</string>
+    <string name="requests_subtitle">Students need your expertise</string>
+    <string name="requests_empty">No active requests right now.\nBe the first to ask for help!</string>
+    <string name="priority_label">PRIORITY</string>
+    <string name="high_urgency_label">HIGH PRIORITY</string>
+    <string name="critical_urgency_label">URGENT</string>
+    <string name="help_now">Help Now</string>
+    <string name="credits_label">KC</string>
+    <string name="posted_by">Posted by</string>
+    <string name="ai_match">AI Match</string>
+    <string name="session_type_chat">💬 Chat</string>
+    <string name="session_type_video">🎥 Video</string>
+    <string name="session_type_whiteboard">📝 Whiteboard</string>
+    <string name="filter_all">All</string>
+    <string name="filter_for_you">For You</string>
+    <string name="filter_high_priority">High Priority</string>
+    <string name="filter_recent">Recent</string>
+
+    <!-- Create Request -->
+    <string name="create_request_title">Post a Help Request</string>
+    <string name="create_request_subtitle">Describe what you need help with</string>
+    <string name="hint_request_title">e.g., Need help with recursion in C++</string>
+    <string name="hint_request_desc">Describe your problem in detail…</string>
+    <string name="hint_subject">Subject (e.g., Data Structures)</string>
+    <string name="hint_topic">Specific Topic</string>
+    <string name="label_credits_offer">Credits to Offer</string>
+    <string name="label_urgency">Priority Level</string>
+    <string name="label_session_type">Preferred Session Type</string>
+    <string name="label_language">Preferred Language</string>
+    <string name="label_duration">Estimated Duration</string>
+    <string name="urgency_normal">Normal</string>
+    <string name="urgency_high">High</string>
+    <string name="urgency_urgent">Urgent</string>
+    <string name="btn_post_request">Post Request</string>
+    <string name="request_posted">Request posted successfully! 🎉</string>
+    <string name="duration_15">15 min</string>
+    <string name="duration_30">30 min</string>
+    <string name="duration_60">1 hour</string>
+
+    <!-- Dashboard / Wallet -->
+    <string name="dashboard_title">Your Dashboard</string>
+    <string name="wallet_title">Knowledge Wallet</string>
+    <string name="wallet_credits_label">Knowledge Credits</string>
+    <string name="wallet_earned">Earned</string>
+    <string name="wallet_spent">Spent</string>
+    <string name="sessions_label">Sessions</string>
+
+    <!-- Streaks -->
+    <string name="streak_title">Teaching Streak</string>
+    <string name="streak_days">day streak</string>
+    <string name="karma_multiplier_label">Karma Multiplier</string>
+    <string name="streak_inactive">Start helping to build your streak!</string>
+    <string name="streak_active">You\'re on fire! Keep helping!</string>
+
+    <!-- Skill Tree -->
+    <string name="skill_tree_title">Expertise Path</string>
+    <string name="skill_novice">Novice</string>
+    <string name="skill_scholar">Scholar</string>
+    <string name="skill_expert">Expert</string>
+    <string name="skill_grandmaster">Mentor</string>
+    <string name="xp_progress">%1$d / %2$d XP</string>
+
+    <!-- Leaderboard -->
+    <string name="leaderboard_title">Campus Leaderboard</string>
+    <string name="leaderboard_empty">Leaderboard loading…</string>
+
+    <!-- Active Sessions -->
+    <string name="active_sessions_title">Active Sessions</string>
+    <string name="no_active_sessions">No active sessions</string>
+    <string name="session_in_progress">In Progress</string>
+    <string name="session_scheduled">Scheduled</string>
+
+    <!-- General -->
+    <string name="loading">Loading…</string>
+    <string name="error_generic">Something went wrong. Try again.</string>
+    <string name="retry">Retry</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="time_ago_minutes">%d min ago</string>
+    <string name="time_ago_hours">%d hrs ago</string>
+    <string name="time_ago_days">%d days ago</string>
 </resources>

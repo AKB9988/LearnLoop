@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- === LearnLoop Brand Palette === -->
+
+    <!-- Primary: Deep Electric Indigo -->
+    <color name="primary">#6C5CE7</color>
+    <color name="primary_dark">#5A4BD1</color>
+    <color name="primary_light">#A29BFE</color>
+    <color name="primary_surface">#1A1625</color>
+
+    <!-- Secondary: Vibrant Teal -->
+    <color name="secondary">#00CEC9</color>
+    <color name="secondary_dark">#00B5B0</color>
+    <color name="secondary_light">#81ECEC</color>
+
+    <!-- Accent: Hot Coral -->
+    <color name="accent">#FF6B6B</color>
+    <color name="accent_dark">#E55555</color>
+    <color name="accent_light">#FF9B9B</color>
+
+    <!-- Gold: For credits, achievements -->
+    <color name="gold">#FDCB6E</color>
+    <color name="gold_dark">#E0B255</color>
+    <color name="gold_light">#FFEAA7</color>
+
+    <!-- Success / Streak Green -->
+    <color name="success">#00B894</color>
+    <color name="success_light">#55EFC4</color>
+
+    <!-- Urgent / Fire Red -->
+    <color name="urgent">#FF4757</color>
+    <color name="urgent_glow">#33FF4757</color>
+
+    <!-- AI Match Blue -->
+    <color name="ai_match">#74B9FF</color>
+    <color name="ai_match_bg">#1A74B9FF</color>
+
+    <!-- === Dark Theme Surface Colors === -->
+    <color name="background_dark">#0D0B1A</color>
+    <color name="surface_dark">#161429</color>
+    <color name="surface_elevated">#1E1B36</color>
+    <color name="surface_card">#252243</color>
+    <color name="surface_card_highlight">#2E2A52</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#F0EEFF</color>
+    <color name="text_secondary">#9B97B8</color>
+    <color name="text_hint">#6C6890</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Divider / Border -->
+    <color name="divider">#2A2645</color>
+    <color name="border_glow">#806C5CE7</color>
+
+    <!-- Priority Glow Colors -->
+    <color name="priority_glow_high">#40FF6B6B</color>
+    <color name="priority_glow_urgent">#60FF4757</color>
+
+    <!-- Leaderboard Podium -->
+    <color name="podium_gold">#FFD700</color>
+    <color name="podium_silver">#C0C0C0</color>
+    <color name="podium_bronze">#CD7F32</color>
+
+    <!-- Skill Tree Levels -->
+    <color name="skill_novice">#74B9FF</color>
+    <color name="skill_scholar">#A29BFE</color>
+    <color name="skill_expert">#FDCB6E</color>
+    <color name="skill_grandmaster">#FF6B6B</color>
+
+    <!-- Session Types -->
+    <color name="session_chat">#74B9FF</color>
+    <color name="session_video">#00CEC9</color>
+    <color name="session_whiteboard">#FDCB6E</color>
+
+    <!-- Filter Chip -->
+    <color name="chip_selected_bg">#336C5CE7</color>
+    <color name="chip_unselected_bg">#1E1B36</color>
+
+    <!-- Defaults -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Shimmer -->
+    <color name="shimmer_base">#1E1B36</color>
+    <color name="shimmer_highlight">#2E2A52</color>
+
+    <!-- Kept for backward compatibility -->
+    <color name="bounty_glow_high">#40FF6B6B</color>
+    <color name="bounty_glow_critical">#60FF4757</color>
 </resources>
