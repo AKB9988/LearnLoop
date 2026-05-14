@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutSkillTree"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_skill_tree"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvPrimarySkill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"
+        android:layout_marginBottom="16dp"
+        tools:text="DATA STRUCTURES" />
+
+    <!-- Skill Path Nodes -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Novice -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <View
+                android:id="@+id/nodeNovice"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/skill_node_circle" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skill_novice"
+                android:textColor="@color/skill_novice"
+                android:textSize="10sp"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+        <View
+            android:id="@+id/connectorNoviceScholar"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_weight="0.6"
+            android:background="@color/divider" />
+        <!-- Scholar -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <View
+                android:id="@+id/nodeScholar"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/skill_node_circle" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skill_scholar"
+                android:textColor="@color/skill_scholar"
+                android:textSize="10sp"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+        <View
+            android:id="@+id/connectorScholarExpert"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_weight="0.6"
+            android:background="@color/divider" />
+        <!-- Expert -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <View
+                android:id="@+id/nodeExpert"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/skill_node_circle" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skill_expert"
+                android:textColor="@color/skill_expert"
+                android:textSize="10sp"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+        <View
+            android:id="@+id/connectorExpertGrandmaster"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_weight="0.6"
+            android:background="@color/divider" />
+        <!-- Grandmaster -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <View
+                android:id="@+id/nodeGrandmaster"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/skill_node_circle" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skill_grandmaster"
+                android:textColor="@color/skill_grandmaster"
+                android:textSize="10sp"
+                android:layout_marginTop="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Current Level -->
+    <TextView
+        android:id="@+id/tvCurrentLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        tools:text="Scholar" />
+
+    <!-- XP Progress -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_progress_track">
+        <View
+            android:id="@+id/viewSkillProgress"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_skill_progress" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvXpProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:textColor="@color/text_hint"
+        android:textSize="11sp"
+        android:layout_marginTop="6dp"
+        tools:text="350 / 500 XP" />
+</LinearLayout>
