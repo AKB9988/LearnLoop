@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/requests_title"
+            style="@style/LearnLoop.SectionHeader"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/requests_subtitle"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+    <!-- Filter Chips -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingVertical="12dp"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:id="@+id/layoutFilterChips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:id="@+id/chipAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_all"
+                android:textColor="@color/primary_light"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_chip_selected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/chipForYou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_for_you"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:background="@drawable/bg_chip_unselected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/chipHighPriority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_high_priority"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:background="@drawable/bg_chip_unselected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/chipRecent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_recent"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:background="@drawable/bg_chip_unselected"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBountyBoard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_bounty_card" />
+
+    <!-- Empty state -->
+    <LinearLayout
+        android:id="@+id/layoutEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📚"
+            android:textSize="48sp" />
+
+        <TextView
+            android:id="@+id/tvEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/requests_empty"
+            android:textColor="@color/text_hint"
+            android:textSize="15sp"
+            android:lineSpacingMultiplier="1.4"
+            android:layout_marginTop="12dp" />
+    </LinearLayout>
+
+    <!-- Loading -->
+    <ProgressBar
+        android:id="@+id/progressBounty"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/primary"
+        android:visibility="gone" />
+</LinearLayout>

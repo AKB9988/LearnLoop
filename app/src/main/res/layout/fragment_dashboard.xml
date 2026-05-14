@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+    android:clipToPadding="false"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="16dp">
+
+        <!-- Wallet Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wallet_title"
+            style="@style/LearnLoop.SectionHeader"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Wallet Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardWallet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="12dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            android:layout_marginBottom="24dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_wallet_gradient"
+                android:orientation="vertical"
+                android:padding="24dp">
+                <!-- User row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivWalletAvatar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/gold" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="12dp">
+                        <TextView
+                            android:id="@+id/tvWalletName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:text="Arjun Bhatt" />
+                        <TextView
+                            android:id="@+id/tvWalletRank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/gold_light"
+                            android:textSize="12sp"
+                            tools:text="Campus Rank #5" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/layoutKarmaBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_credit_badge"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚡"
+                            android:textSize="12sp" />
+                        <TextView
+                            android:id="@+id/tvKarmaMultiplier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#1A1625"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_marginStart="4dp"
+                            tools:text="1.5x Karma" />
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="#40FFFFFF" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wallet_credits_label"
+                    android:textColor="#B0FFFFFF"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.15"
+                    android:textAllCaps="true" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+                    <TextView
+                        android:id="@+id/tvCreditCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="48sp"
+                        android:textStyle="bold"
+                        tools:text="1,250" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" KC"
+                        android:textColor="@color/gold"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="6dp" />
+                </LinearLayout>
+                <!-- Earned / Spent / Sessions -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wallet_earned"
+                            android:textColor="#80FFFFFF"
+                            android:textSize="11sp"
+                            android:textAllCaps="true" />
+                        <TextView
+                            android:id="@+id/tvTotalEarned"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/success_light"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:text="↑ 2,100" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wallet_spent"
+                            android:textColor="#80FFFFFF"
+                            android:textSize="11sp"
+                            android:textAllCaps="true" />
+                        <TextView
+                            android:id="@+id/tvTotalSpent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/accent_light"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:text="↓ 850" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sessions_label"
+                            android:textColor="#80FFFFFF"
+                            android:textSize="11sp"
+                            android:textAllCaps="true" />
+                        <TextView
+                            android:id="@+id/tvSessionsCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:text="24" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Streak Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/streak_title"
+            style="@style/LearnLoop.SectionHeader"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Streak Card -->
+        <include layout="@layout/section_streak" />
+
+        <!-- Skill Path Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/skill_tree_title"
+            style="@style/LearnLoop.SectionHeader"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Skill Tree -->
+        <include layout="@layout/section_skill_tree" />
+
+        <!-- Leaderboard Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/leaderboard_title"
+            style="@style/LearnLoop.SectionHeader"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Leaderboard Podium -->
+        <include layout="@layout/section_leaderboard" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

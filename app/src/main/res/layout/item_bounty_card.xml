@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardBounty"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/surface_card"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/divider">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top row: Subject + Priority badge + AI Match -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Subject chip -->
+            <TextView
+                android:id="@+id/tvSubjectChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tag_chip"
+                android:textColor="@color/secondary_light"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:letterSpacing="0.03"
+                tools:text="Data Structures" />
+
+            <!-- Urgency badge -->
+            <TextView
+                android:id="@+id/tvUrgencyBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_priority_high"
+                android:textColor="@color/accent"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:layout_marginStart="6dp"
+                android:letterSpacing="0.05"
+                android:visibility="gone"
+                tools:text="HIGH PRIORITY"
+                tools:visibility="visible" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- AI Match Score -->
+            <LinearLayout
+                android:id="@+id/layoutAiMatch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_ai_match_badge"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:visibility="gone"
+                tools:visibility="visible">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🤖"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/tvAiMatchScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/ai_match"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="3dp"
+                    tools:text="92% match" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvBountyTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:lineSpacingMultiplier="1.2"
+            tools:text="Need help with Monotonic Stacks in C++" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tvBountyDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginTop="6dp"
+            android:lineSpacingMultiplier="1.3"
+            tools:text="I'm struggling with the next greater element problem..." />
+
+        <!-- Session info row: Type + Duration + Language -->
+        <LinearLayout
+            android:id="@+id/layoutSessionInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp">
+
+            <!-- Session type -->
+            <TextView
+                android:id="@+id/tvSessionType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_session_type"
+                android:textColor="@color/secondary_light"
+                android:textSize="11sp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                tools:text="💬 Chat" />
+
+            <!-- Duration -->
+            <TextView
+                android:id="@+id/tvDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_hint"
+                android:textSize="11sp"
+                android:layout_marginStart="8dp"
+                android:drawablePadding="3dp"
+                tools:text="⏱ 30 min" />
+
+            <!-- Language -->
+            <TextView
+                android:id="@+id/tvLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_hint"
+                android:textSize="11sp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                tools:text="🌐 English"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <!-- Tags row -->
+        <LinearLayout
+            android:id="@+id/layoutTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+            <!-- Tags are added programmatically -->
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="12dp"
+            android:background="@color/divider" />
+
+        <!-- Bottom row: poster info + credits + help button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivPosterAvatar"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/divider" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:id="@+id/tvPosterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="Priya S." />
+
+                <TextView
+                    android:id="@+id/tvTimeAgo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_hint"
+                    android:textSize="10sp"
+                    tools:text="2h ago" />
+            </LinearLayout>
+
+            <!-- Credits offered -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="end"
+                android:layout_marginEnd="12dp">
+                <TextView
+                    android:id="@+id/tvCreditsOffered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gold"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="50 KC" />
+                <TextView
+                    android:id="@+id/tvBountyMultiplier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gold_light"
+                    android:textSize="9sp"
+                    android:visibility="gone"
+                    tools:text="1.5x Priority Bonus"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+            <!-- Help Now button -->
+            <TextView
+                android:id="@+id/btnAcceptBounty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_help_button"
+                android:text="@string/help_now"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
