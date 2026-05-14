@@ -108,11 +108,44 @@ public class LoginActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
-                    showLoading(false);
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
-                        navigateToMain();
+                        FirebaseUser user = firebaseAuth.getCurrentUser();
+                        if (user != null) {
+                            user.getIdToken(false).addOnSuccessListener(result -> {
+                                String token = "Bearer " + result.getToken();
+                                com.example.learnloop.models.UserProfileModel profile =
+                                        new com.example.learnloop.models.UserProfileModel(user.getDisplayName(), user.getEmail());
+
+                                com.example.learnloop.network.RetrofitClient.getInstance().getApiService()
+                                        .registerUser(token, profile)
+                                        .enqueue(new retrofit2.Callback<Void>() {
+                                            @Override
+                                            public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                                                showLoading(false);
+                                                if (!response.isSuccessful()) {
+                                                    Toast.makeText(LoginActivity.this, "Reg Failed: " + response.code(), Toast.LENGTH_SHORT).show();
+                                                }
+                                                // Navigate to main regardless of success or 400 error (if user already exists)
+                                                navigateToMain();
+                                            }
+
+                                            @Override
+                                            public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                                                showLoading(false);
+                                                navigateToMain();
+                                            }
+                                        });
+                            }).addOnFailureListener(e -> {
+                                showLoading(false);
+                                navigateToMain();
+                            });
+                        } else {
+                            showLoading(false);
+                            navigateToMain();
+                        }
                     } else {
+                        showLoading(false);
                         Log.e(TAG, "signInWithCredential:failure", task.getException());
                         Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }

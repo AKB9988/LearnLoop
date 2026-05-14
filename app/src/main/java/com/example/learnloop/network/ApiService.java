@@ -7,7 +7,10 @@ import com.example.learnloop.models.LeaderboardEntry;
 import com.example.learnloop.models.MatchAcceptRequest;
 import com.example.learnloop.models.UserWallet;
 
+import com.example.learnloop.models.UserProfileModel;
+
 import java.util.List;
+
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -63,8 +66,18 @@ public interface ApiService {
      * Fetch the campus leaderboard (top mentors).
      * GET /leaderboard/top
      */
-    @GET("leaderboard/top")
+    @GET("user/leaderboard/top")
     Call<ApiResponse<List<LeaderboardEntry>>> getLeaderboard(
             @Header("Authorization") String authToken
+    );
+
+    /**
+     * Register a new user profile on the backend.
+     * POST /user/register
+     */
+    @retrofit2.http.POST("user/register")
+    Call<Void> registerUser(
+            @retrofit2.http.Header("Authorization") String authToken,
+            @retrofit2.http.Body UserProfileModel body
     );
 }

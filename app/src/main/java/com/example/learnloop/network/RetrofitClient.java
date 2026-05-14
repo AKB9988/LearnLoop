@@ -19,13 +19,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     // TODO: Replace with your actual FastAPI server URL
-    private static final String BASE_URL = "http://10.0.2.2:8000/"; // localhost for emulator
+    private static final String BASE_URL = "https://scorebook-unlinked-relieving.ngrok-free.dev/"; // ngrok link
 
     private static RetrofitClient instance;
     private final ApiService apiService;
 
     private RetrofitClient() {
         OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(chain -> {
+                    okhttp3.Request original = chain.request();
+                    okhttp3.Request request = original.newBuilder()
+                            .header("ngrok-skip-browser-warning", "69420")
+                            .build();
+                    return chain.proceed(request);
+                })
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
