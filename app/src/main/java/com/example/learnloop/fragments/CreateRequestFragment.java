@@ -25,7 +25,7 @@ public class CreateRequestFragment extends Fragment {
     private TextView btnPostRequest;
 
     private String selectedSessionType = "chat";
-    private String selectedUrgency = "normal";
+    private String selectedUrgency = "medium";
     private int selectedDuration = 30;
 
     @Nullable
@@ -72,7 +72,7 @@ public class CreateRequestFragment extends Fragment {
         chipWhiteboard.setOnClickListener(v -> setSessionType("whiteboard", chipWhiteboard, chipChat, chipVideo));
 
         // Urgency Selection
-        chipNormal.setOnClickListener(v -> setUrgency("normal", chipNormal, chipHigh, chipUrgent));
+        chipNormal.setOnClickListener(v -> setUrgency("medium", chipNormal, chipHigh, chipUrgent));
         chipHigh.setOnClickListener(v -> setUrgency("high", chipHigh, chipNormal, chipUrgent));
         chipUrgent.setOnClickListener(v -> setUrgency("urgent", chipUrgent, chipNormal, chipHigh));
 
@@ -135,7 +135,7 @@ public class CreateRequestFragment extends Fragment {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
-            simulateSuccess();
+            simulateSuccess(null, selectedSessionType);
             return;
         }
 
@@ -149,11 +149,20 @@ public class CreateRequestFragment extends Fragment {
                         public void onResponse(retrofit2.Call<com.example.learnloop.models.ApiResponse<com.example.learnloop.models.HelpRequest>> call,
                                                retrofit2.Response<com.example.learnloop.models.ApiResponse<com.example.learnloop.models.HelpRequest>> response) {
                             btnPostRequest.setEnabled(true);
-                            if (response.isSuccessful()) {
-                                simulateSuccess();
+                            if (response.isSuccessful() && response.body() != null && response.body().getData() != null) {
+                                String realId = response.body().getData().getId();
+                                simulateSuccess(realId, selectedSessionType);
                             } else {
-                                Toast.makeText(getContext(), "Server error. Simulated success.", Toast.LENGTH_SHORT).show();
-                                simulateSuccess();
+                                String errorMsg = "Server error: " + response.code();
+                                try {
+                                    if (response.errorBody() != null) {
+                                        errorMsg += " - " + response.errorBody().string();
+                                    }
+                                } catch (Exception e) {
+                                    // ignore
+                                }
+                                Toast.makeText(getContext(), errorMsg, Toast.LENGTH_LONG).show();
+                                simulateSuccess(null, selectedSessionType);
                             }
                         }
 
@@ -161,18 +170,51 @@ public class CreateRequestFragment extends Fragment {
                         public void onFailure(retrofit2.Call<com.example.learnloop.models.ApiResponse<com.example.learnloop.models.HelpRequest>> call, Throwable t) {
                             btnPostRequest.setEnabled(true);
                             Toast.makeText(getContext(), "Network error. Simulated success.", Toast.LENGTH_SHORT).show();
-                            simulateSuccess(); // Fallback for UI testing
+                            simulateSuccess(null, selectedSessionType); // Fallback for UI testing
                         }
                     });
         }).addOnFailureListener(e -> {
             btnPostRequest.setEnabled(true);
-            simulateSuccess();
+            simulateSuccess(null, selectedSessionType);
         });
     }
 
-    private void simulateSuccess() {
+    private void simulateSuccess(String requestId, String sessionType) {
         Toast.makeText(getContext(), R.string.request_posted, Toast.LENGTH_SHORT).show();
-        
+
+        // Use real ID or fallback to mock
+        final String matchId = (requestId != null && !requestId.isEmpty()) ? requestId : java.util.UUID.randomUUID().toString().substring(0, 6);
+        final String type = sessionType != null ? sessionType : "video";
+
+        // Sanitize ID for URLs. 
+        // For the hackathon demo, we hardcode the room ID so both phones ALWAYS connect 
+        // even if the backend drops or they click a mock request.
+        final String safeId = "DemoRoom2026";
+
+        // Schedule a mock push notification (Alert Dialog) 12 seconds later for the demo
+        new android.os.Handler(android.os.Looper.getMainLooper()).postDelayed(() -> {
+            if (getActivity() != null && !getActivity().isFinishing()) {
+                new androidx.appcompat.app.AlertDialog.Builder(getActivity())
+                        .setTitle("🎉 Match Found!")
+                        .setMessage("A mentor has accepted your request! They are joining the room now.")
+                        .setPositiveButton("Join Session", (dialog, which) -> {
+                            String sessionUrl;
+                            if (type.contains("chat")) {
+                                sessionUrl = "https://tlk.io/learnloop" + safeId;
+                            } else if (type.contains("board") || type.contains("white")) {
+                                sessionUrl = "https://wbo.ophir.dev/boards/learnloop" + safeId;
+                            } else {
+                                sessionUrl = "https://meet.jit.si/LearnLoop" + safeId;
+                            }
+                            android.content.Intent browserIntent = new android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(sessionUrl));
+                            startActivity(browserIntent);
+                        })
+                        .setNegativeButton("Close", null)
+                        .setCancelable(false)
+                        .show();
+            }
+        }, 12000); // 12 seconds delay gives them time to navigate away before pop-up
+
         // Reset fields
         etRequestTitle.setText("");
         etRequestDesc.setText("");
@@ -180,7 +222,7 @@ public class CreateRequestFragment extends Fragment {
         etTopic.setText("");
         etCredits.setText("30");
         setSessionType("chat", chipChat, chipVideo, chipWhiteboard);
-        setUrgency("normal", chipNormal, chipHigh, chipUrgent);
+        setUrgency("medium", chipNormal, chipHigh, chipUrgent);
         setDuration(30, chip30min, chip15min, chip60min);
     }
 }

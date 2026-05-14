@@ -15,6 +15,9 @@ import com.bumptech.glide.Glide;
 import com.example.learnloop.R;
 import com.example.learnloop.models.HelpRequest;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 import java.util.Locale;
@@ -199,12 +202,33 @@ public class BountyAdapter extends RecyclerView.Adapter<BountyAdapter.BountyView
                 }
             }
 
-            // Accept click
-            btnAcceptBounty.setOnClickListener(v -> {
-                if (listener != null) {
-                    listener.onAcceptClicked(request);
+            // Accept click logic
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            boolean isMyRequest = false;
+            if (currentUser != null && currentUser.getDisplayName() != null) {
+                isMyRequest = currentUser.getDisplayName().equals(request.getPosterName());
+            }
+
+            if (isMyRequest) {
+                // Always show "Join Room" for your own requests so you can wait for helpers!
+                btnAcceptBounty.setVisibility(View.VISIBLE);
+                btnAcceptBounty.setText("Join Room");
+                btnAcceptBounty.setBackgroundTintList(android.content.res.ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.success)));
+                btnAcceptBounty.setOnClickListener(v -> {
+                    if (listener != null) listener.onAcceptClicked(request);
+                });
+            } else {
+                if ("accepted".equalsIgnoreCase(request.getStatus()) || "in_session".equalsIgnoreCase(request.getStatus())) {
+                    btnAcceptBounty.setVisibility(View.GONE);
+                } else {
+                    btnAcceptBounty.setVisibility(View.VISIBLE);
+                    btnAcceptBounty.setText("Help Now");
+                    btnAcceptBounty.setBackgroundTintList(android.content.res.ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.primary)));
+                    btnAcceptBounty.setOnClickListener(v -> {
+                        if (listener != null) listener.onAcceptClicked(request);
+                    });
                 }
-            });
+            }
         }
     }
 }

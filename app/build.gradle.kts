@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.cardview)
     implementation(libs.recyclerview)
     implementation(libs.viewpager2)
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
 
     implementation(platform(libs.firebase.bom))

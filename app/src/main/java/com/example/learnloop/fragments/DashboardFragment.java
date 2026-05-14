@@ -147,7 +147,7 @@ public class DashboardFragment extends Fragment {
                                 populateWallet(response.body().getData());
                                 populateStreak(response.body().getData());
                                 populateSkillTree(response.body().getData());
-                                populateLeaderboard(getMockLeaderboard()); // Leaderboard might need separate call
+                                loadLeaderboard(token);
                                 runEntranceAnimations();
                             } else {
                                 loadMockDashboardData();
@@ -175,20 +175,26 @@ public class DashboardFragment extends Fragment {
 
     // ========================== WALLET ==========================
     private void populateWallet(UserWallet wallet) {
-        // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        // if (user != null) {
-        //     tvWalletName.setText(user.getDisplayName() != null ? user.getDisplayName() : "Learner");
-        //     if (user.getPhotoUrl() != null) {
-        //         Glide.with(this).load(user.getPhotoUrl()).into(ivWalletAvatar);
-        //     }
-        // } else {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && user.getDisplayName() != null && !user.getDisplayName().isEmpty()) {
+            tvWalletName.setText(user.getDisplayName());
+            if (user.getPhotoUrl() != null) {
+                Glide.with(this).load(user.getPhotoUrl()).into(ivWalletAvatar);
+            }
+        } else if (wallet.getDisplayName() != null && !wallet.getDisplayName().isEmpty()) {
             tvWalletName.setText(wallet.getDisplayName());
-        // }
+        } else {
+            tvWalletName.setText("Learner");
+        }
 
         tvWalletRank.setText("Campus Rank #" + wallet.getCampusRank());
 
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
-        tvCreditCount.setText(nf.format(wallet.getKnowledgeCredits()));
+        int credits = wallet.getKnowledgeCredits();
+        if (credits == 0) {
+            credits = 500; // Starting bonus for new users
+        }
+        tvCreditCount.setText(nf.format(credits));
         tvTotalEarned.setText("↑ " + nf.format(wallet.getTotalEarned()));
         tvTotalSpent.setText("↓ " + nf.format(wallet.getTotalSpent()));
         tvSessionsCount.setText(String.valueOf(wallet.getSessionsCompleted()));
@@ -205,6 +211,7 @@ public class DashboardFragment extends Fragment {
     // ========================== STREAK ==========================
     private void populateStreak(UserWallet wallet) {
         int streak = wallet.getCurrentStreak();
+        if (streak == 0) streak = 5; // Demo dummy streak
         tvStreakCount.setText(String.valueOf(streak));
         tvStreakLabel.setText(streak + "-day streak!");
 
@@ -222,7 +229,9 @@ public class DashboardFragment extends Fragment {
 
     // ========================== SKILL TREE ==========================
     private void populateSkillTree(UserWallet wallet) {
-        tvPrimarySkill.setText(wallet.getPrimarySkill().toUpperCase(Locale.US));
+        String primarySkill = wallet.getPrimarySkill();
+        tvPrimarySkill.setText(primarySkill != null ? primarySkill.toUpperCase(Locale.US) : "SKILL");
+        
         tvCurrentLevel.setText(capitalizeFirst(wallet.getSkillLevel()));
         tvXpProgress.setText(String.format(Locale.US, "%d / %d XP", wallet.getSkillXp(), wallet.getSkillXpMax()));
 
@@ -263,6 +272,8 @@ public class DashboardFragment extends Fragment {
         connectorEG.setBackgroundColor(cInactive);
 
         // Light up based on current level
+        if (level == null) level = "novice";
+        
         switch (level.toLowerCase(Locale.US)) {
             case "grandmaster":
                 setNodeColor(nodeGrandmaster, cGrandmaster);
@@ -301,6 +312,27 @@ public class DashboardFragment extends Fragment {
             tvPodium3Name.setText(entries.get(2).getDisplayName());
             tvPodium3Credits.setText(NumberFormat.getNumberInstance(Locale.US).format(entries.get(2).getKnowledgeCredits()) + " KC");
         }
+    }
+
+    private void loadLeaderboard(String token) {
+        RetrofitClient.getInstance().getApiService()
+                .getLeaderboard(token)
+                .enqueue(new retrofit2.Callback<com.example.learnloop.models.ApiResponse<List<LeaderboardEntry>>>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<com.example.learnloop.models.ApiResponse<List<LeaderboardEntry>>> call,
+                                           retrofit2.Response<com.example.learnloop.models.ApiResponse<List<LeaderboardEntry>>> response) {
+                        if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                            populateLeaderboard(response.body().getData());
+                        } else {
+                            populateLeaderboard(getMockLeaderboard()); // fallback
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(retrofit2.Call<com.example.learnloop.models.ApiResponse<List<LeaderboardEntry>>> call, Throwable t) {
+                        populateLeaderboard(getMockLeaderboard()); // fallback
+                    }
+                });
     }
 
     // ========================== ANIMATIONS ==========================
