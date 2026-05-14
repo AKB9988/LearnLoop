@@ -47,17 +47,35 @@ def get_ai_scores(user_profile: Dict[str, Any], active_requests: List[Dict[str, 
         Example: {{"req_1": 85.5, "req_2": 42.0}}
         """
         
-        response = model.generate_content(prompt)
-        # Clean up response (sometimes LLMs wrap JSON in backticks)
-        json_str = response.text.strip().replace("```json", "").replace("```", "")
-        ai_scores = json.loads(json_str)
-        
-        logger.info(f"[AI] Gemini successfully scored {len(ai_scores)} requests.")
-        return {k: float(v) for k, v in ai_scores.items()}
+        try:
+            # Try different models in case of 404 or version errors
+            models_to_try = ["gemini-1.5-flash", "gemini-pro", "gemini-1.5-pro"]
+            response = None
+            
+            for model_name in models_to_try:
+                try:
+                    current_model = genai.GenerativeModel(model_name)
+                    response = current_model.generate_content(prompt)
+                    if response and response.text:
+                        logger.info(f"[AI] Successfully used model: {model_name}")
+                        break
+                except Exception as model_err:
+                    logger.warning(f"[AI] Model {model_name} failed: {model_err}")
+                    continue
+            
+            if not response:
+                raise Exception("All available Gemini models failed to respond.")
 
-    except Exception as e:
-        logger.error(f"[AI] Gemini failed: {e}. Falling back to local algorithm.")
-        return get_fallback_scores(user_profile, active_requests)
+            # Clean up response (sometimes LLMs wrap JSON in backticks)
+            json_str = response.text.strip().replace("```json", "").replace("```", "")
+            ai_scores = json.loads(json_str)
+            
+            logger.info(f"[AI] Gemini successfully scored {len(ai_scores)} requests.")
+            return {k: float(v) for k, v in ai_scores.items()}
+
+        except Exception as e:
+            logger.error(f"[AI] Gemini failed: {e}. Falling back to local algorithm.")
+            return get_fallback_scores(user_profile, active_requests)
 
 def get_fallback_scores(user_profile: Dict[str, Any], active_requests: List[Dict[str, Any]]) -> Dict[str, float]:
     """
