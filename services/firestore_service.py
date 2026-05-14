@@ -57,15 +57,17 @@ def create_request(uid: str, data: dict) -> str:
 
 def get_active_requests() -> list:
     """Fetch all requests with status == active."""
+    from firebase_admin import firestore
     docs = (
         db.collection("requests")
-        .where("status", "==", "active")
+        .where(filter=firestore.FieldFilter("status", "==", "active"))
         .stream()
     )
     results = []
     for doc in docs:
         results.append({"id": doc.id, **doc.to_dict()})
     return results
+
 
 
 def get_request(request_id: str) -> dict:
