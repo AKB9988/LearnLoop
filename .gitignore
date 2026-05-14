@@ -1,21 +1,23 @@
-# Firebase Secrets
+# Firebase keys
 firebase_key.json
-
-# Environments
-.env
-.venv
-venv/
-ENV/
+*.json
 
 # Python
 __pycache__/
 *.pyc
+venv/
+.venv/
+.env
+
+# Misc
+.DS_Store
+.idea/
+.vscode/
+ngrok.exe
 *.pyo
 *.pyd
 .pytest_cache/
 .coverage
-htmlcov/
-
 # OS
 .DS_Store
 Thumbs.db
